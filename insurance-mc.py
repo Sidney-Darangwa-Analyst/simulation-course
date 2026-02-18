@@ -17,6 +17,12 @@ for month in range(n_months):
 
 mean_cost = np.mean(total_costs)
 std_cost = np.std(total_costs)
+n = n_months
+se = std_cost / np.sqrt(n)
+ci_half = 1.96 * se
+ci_low = mean_cost - ci_half
+ci_high = mean_cost + ci_half
+
 min_cost = np.min(total_costs)
 max_cost = np.max(total_costs)
 p5 = np.percentile(total_costs, 5)
@@ -24,6 +30,7 @@ p95 = np.percentile(total_costs, 95)
 
 print("Total monthly cost (10,000 months):")
 print(f"  Mean:           ${mean_cost:,.2f}")
+print(f"  95% CI (mean):  [${ci_low:,.2f}, ${ci_high:,.2f}]  (Mean +/- 1.96*std/sqrt(n))")
 print(f"  Std dev:        ${std_cost:,.2f}")
 print(f"  Min:            ${min_cost:,.2f}")
 print(f"  Max:            ${max_cost:,.2f}")
