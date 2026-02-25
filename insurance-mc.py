@@ -17,8 +17,10 @@ for month in range(n_months):
 
 mean_cost = np.mean(total_costs)
 std_cost = np.std(total_costs)
+
+# 95% confidence interval for the mean: Mean +/- 1.96 * std / sqrt(n)
 n = n_months
-se = std_cost / np.sqrt(n)
+se = std_cost / np.sqrt(n)   # standard error
 ci_half = 1.96 * se
 ci_low = mean_cost - ci_half
 ci_high = mean_cost + ci_half
@@ -30,6 +32,7 @@ p95 = np.percentile(total_costs, 95)
 
 print("Total monthly cost (10,000 months):")
 print(f"  Mean:           ${mean_cost:,.2f}")
+# 95% CI printed using formula: Mean +/- 1.96*std/sqrt(n) (ASCII for Windows console)
 print(f"  95% CI (mean):  [${ci_low:,.2f}, ${ci_high:,.2f}]  (Mean +/- 1.96*std/sqrt(n))")
 print(f"  Std dev:        ${std_cost:,.2f}")
 print(f"  Min:            ${min_cost:,.2f}")
